@@ -5,6 +5,8 @@ object AppLog {
     var isInitialized: Boolean = false
         private set
 
+    const val DefaultTag: String = "ConvertAppLog"
+
     fun initialize() {
         isInitialized = true
     }

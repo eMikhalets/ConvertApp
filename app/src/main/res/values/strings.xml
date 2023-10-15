@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">ConvertApp</string>
+
+    <string name="error">Error</string>
+    <string name="error_internal">Internal error</string>
+
     <string name="currency_code_hint">Currency code, like USB, RUB…</string>
     <string name="add_currency">Add currency</string>
     <string name="old_values_warning">Calculation of currencies is carried out at outdated exchange rates - %s</string>
