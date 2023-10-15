@@ -1,4 +1,4 @@
-package com.emikhalets.convertapp
+package com.emikhalets.convertapp.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

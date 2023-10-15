@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ConvertApp</string>
+    <string name="currency_code_hint">Currency code, like USB, RUB…</string>
+    <string name="add_currency">Add currency</string>
+    <string name="old_values_warning">Calculation of currencies is carried out at outdated exchange rates - %s</string>
+    <string name="valid_values">Exchange rates are valid for %s</string>
 </resources>
