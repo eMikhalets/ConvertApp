@@ -6,7 +6,7 @@ import androidx.compose.ui.res.stringResource
 import com.emikhalets.convertapp.R
 import com.emikhalets.convertapp.core.common.EmptyString
 
-fun StringValue.asString(context: Context): String {
+fun StringValue?.asString(context: Context): String {
     val internal = context.getString(R.string.error_internal)
     return when (this) {
         StringValue.Empty -> EmptyString
@@ -14,11 +14,12 @@ fun StringValue.asString(context: Context): String {
         is StringValue.Message -> text
         is StringValue.Error -> throwable.message ?: internal
         is StringValue.Resource -> context.getString(resId, *args)
+        else -> internal
     }
 }
 
 @Composable
-fun StringValue.asString(): String {
+fun StringValue?.asString(): String {
     val internal = stringResource(R.string.error_internal)
     return when (this) {
         StringValue.Empty -> internal
@@ -26,6 +27,7 @@ fun StringValue.asString(): String {
         is StringValue.Message -> text
         is StringValue.Error -> throwable.message ?: internal
         is StringValue.Resource -> stringResource(resId, *args)
+        else -> internal
     }
 }
 
