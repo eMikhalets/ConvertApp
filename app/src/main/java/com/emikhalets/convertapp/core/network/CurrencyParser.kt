@@ -1,7 +1,6 @@
 package com.emikhalets.convertapp.core.network
 
 import com.emikhalets.convertapp.core.common.extensions.loge
-import com.emikhalets.convertapp.domain.model.CurrencyValue
 import javax.inject.Inject
 import org.jsoup.nodes.Element
 
@@ -11,7 +10,7 @@ class CurrencyParser @Inject constructor() : AppParser() {
     private val currencyRowKey = "[data-symbol*=CUR]"
     private val dataSymbolKey = "data-symbol"
 
-    suspend fun loadExchangesValues(codes: List<String>): List<CurrencyValue> {
+    suspend fun loadExchangesValues(codes: List<String>): List<CurrencyDto> {
         return codes
             .map { it.take(3) }.toSet()
             .map { parseSource("$source$it") }
@@ -20,13 +19,13 @@ class CurrencyParser @Inject constructor() : AppParser() {
             .mapNotNull { convertData(it) }
     }
 
-    private fun convertData(element: Element): CurrencyValue? {
+    private fun convertData(element: Element): CurrencyDto? {
         return try {
             val data = element.text().split(" ")
             val code = data[0]
             val value = data[1].toDoubleOrNull()
             checkNotNull(value)
-            CurrencyValue(code, value)
+            CurrencyDto(code, value)
         } catch (e: Exception) {
             loge(e)
             null
