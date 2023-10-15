@@ -1,4 +1,4 @@
-package com.emikhalets.convertapp.domain.model
+package com.emikhalets.convertapp.domain
 
 import com.emikhalets.convertapp.core.common.CodeFailure
 import com.emikhalets.convertapp.core.common.CodeSuccess

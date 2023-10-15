@@ -5,7 +5,7 @@ import com.emikhalets.convertapp.core.database.table_currencies.CurrenciesDao
 import com.emikhalets.convertapp.core.database.table_currencies.CurrencyDb
 import com.emikhalets.convertapp.core.database.table_exchanges.ExchangeDb
 import com.emikhalets.convertapp.core.database.table_exchanges.ExchangesDao
-import com.emikhalets.convertapp.domain.model.AppResult
+import com.emikhalets.convertapp.domain.AppResult
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 

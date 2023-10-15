@@ -1,7 +1,7 @@
 package com.emikhalets.convertapp.core.common.extensions
 
-import com.emikhalets.convertapp.domain.model.AppResult
-import com.emikhalets.convertapp.domain.model.StringValue
+import com.emikhalets.convertapp.domain.AppResult
+import com.emikhalets.convertapp.domain.StringValue
 
 suspend fun <T> execute(block: suspend () -> T): AppResult<T> {
     return try {

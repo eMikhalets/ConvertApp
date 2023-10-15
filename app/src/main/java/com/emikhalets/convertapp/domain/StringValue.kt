@@ -1,4 +1,4 @@
-package com.emikhalets.convertapp.domain.model
+package com.emikhalets.convertapp.domain
 
 import android.content.Context
 import androidx.compose.runtime.Composable
