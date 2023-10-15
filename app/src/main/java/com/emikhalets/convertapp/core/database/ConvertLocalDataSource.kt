@@ -1,6 +1,6 @@
 package com.emikhalets.convertapp.core.database
 
-import com.emikhalets.convertapp.core.common.extensions.executeDatabase
+import com.emikhalets.convertapp.core.common.extensions.execute
 import com.emikhalets.convertapp.core.database.table_currencies.CurrenciesDao
 import com.emikhalets.convertapp.core.database.table_currencies.CurrencyDb
 import com.emikhalets.convertapp.core.database.table_exchanges.ExchangeDb
@@ -23,46 +23,46 @@ class ConvertLocalDataSource @Inject constructor(
     }
 
     suspend fun updateExchanges(list: List<ExchangeDb>): AppResult<Unit> {
-        return executeDatabase { exchangesDao.update(list) }
+        return execute { exchangesDao.update(list) }
     }
 
     suspend fun isCurrencyExist(code: String): AppResult<Boolean> {
-        return executeDatabase { currenciesDao.isCodeExist(code) }
+        return execute { currenciesDao.isCodeExist(code) }
     }
 
     suspend fun insertCurrency(model: CurrencyDb): AppResult<Unit> {
-        return executeDatabase { currenciesDao.insert(model) }
+        return execute { currenciesDao.insert(model) }
     }
 
     suspend fun insertExchange(model: ExchangeDb): AppResult<Unit> {
-        return executeDatabase { exchangesDao.insert(model) }
+        return execute { exchangesDao.insert(model) }
     }
 
     suspend fun insertExchanges(list: List<ExchangeDb>): AppResult<Unit> {
-        return executeDatabase { exchangesDao.insert(list) }
+        return execute { exchangesDao.insert(list) }
     }
 
     suspend fun updateExchange(model: ExchangeDb): AppResult<Unit> {
-        return executeDatabase { exchangesDao.update(model) }
+        return execute { exchangesDao.update(model) }
     }
 
     suspend fun getCurrenciesSync(): AppResult<List<CurrencyDb>> {
-        return executeDatabase { currenciesDao.getAll() }
+        return execute { currenciesDao.getAll() }
     }
 
     suspend fun getExchangesSync(): AppResult<List<ExchangeDb>> {
-        return executeDatabase { exchangesDao.getAll() }
+        return execute { exchangesDao.getAll() }
     }
 
     suspend fun deleteCurrency(code: String): AppResult<Unit> {
-        return executeDatabase { currenciesDao.deleteByCode(code) }
+        return execute { currenciesDao.deleteByCode(code) }
     }
 
     suspend fun deleteExchanges(code: String): AppResult<Unit> {
-        return executeDatabase { exchangesDao.deleteByCode(code) }
+        return execute { exchangesDao.deleteByCode(code) }
     }
 
     suspend fun dropExchanges(): AppResult<Unit> {
-        return executeDatabase { exchangesDao.drop() }
+        return execute { exchangesDao.drop() }
     }
 }
