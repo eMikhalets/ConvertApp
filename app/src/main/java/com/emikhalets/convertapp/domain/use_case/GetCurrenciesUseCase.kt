@@ -1,6 +1,6 @@
 package com.emikhalets.convertapp.domain.use_case
 
-import com.emikhalets.convert.data.Repository
+import com.emikhalets.convertapp.data.Repository
 import com.emikhalets.convertapp.domain.model.CurrencyModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
