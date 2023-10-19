@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ fun FloatingButtonBox(
     Box(modifier = modifier.fillMaxSize()) {
         content()
         FloatingActionButton(
+            backgroundColor = MaterialTheme.colors.primary,
             onClick = onClick,
             modifier = Modifier
                 .align(Alignment.BottomEnd)

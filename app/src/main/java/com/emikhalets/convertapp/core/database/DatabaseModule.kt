@@ -1,6 +1,7 @@
 package com.emikhalets.convertapp.core.database
 
 import android.content.Context
+import androidx.room.Room
 import com.emikhalets.convertapp.core.database.table_currencies.CurrenciesDao
 import com.emikhalets.convertapp.core.database.table_exchanges.ExchangesDao
 import dagger.Module
@@ -11,20 +12,23 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ConvertDatabaseModule {
+object DatabaseModule {
 
     @Provides
-    fun providesConvertDatabase(@ApplicationContext context: Context): ConvertDatabase {
-        return ConvertDatabase.getInstance(context)
+    fun providesAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        val name = "Convert.db"
+        return Room
+            .databaseBuilder(context, AppDatabase::class.java, name)
+            .build()
     }
 
     @Provides
-    fun providesCurrenciesDao(database: ConvertDatabase): CurrenciesDao {
+    fun providesCurrenciesDao(database: AppDatabase): CurrenciesDao {
         return database.currenciesDao
     }
 
     @Provides
-    fun providesExchangesDao(database: ConvertDatabase): ExchangesDao {
+    fun providesExchangesDao(database: AppDatabase): ExchangesDao {
         return database.exchangesDao
     }
 }

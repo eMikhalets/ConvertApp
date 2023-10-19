@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.bundles.androidx.lifecycle)
     implementation(libs.bundles.androidx.coroutines)
+    implementation(libs.bundles.androidx.room)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.androidx.compose)
@@ -70,12 +71,11 @@ dependencies {
     implementation(libs.androidx.hilt.navigation)
     implementation(libs.androidx.navigation.compose)
 
-    implementation(libs.bundles.androidx.room)
-
+    implementation(libs.google.hilt.android)
     implementation(libs.jsoup)
 
-    implementation(libs.google.hilt.android)
     kapt(libs.google.hilt.compiler)
+    kapt(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

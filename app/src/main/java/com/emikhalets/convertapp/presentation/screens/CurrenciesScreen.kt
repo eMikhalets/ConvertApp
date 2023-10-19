@@ -34,17 +34,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.emikhalets.convertapp.R
-import com.emikhalets.convertapp.core.ui.CurrencyVisualTransformation
-import com.emikhalets.convertapp.core.ui.extentions.ScreenPreview
-import com.emikhalets.convertapp.core.ui.theme.AppTheme
-import com.emikhalets.convertapp.presentation.screens.CurrenciesContract.Action
 import com.emikhalets.convertapp.core.common.date.formatFullDate
 import com.emikhalets.convertapp.core.common.date.localDate
 import com.emikhalets.convertapp.core.common.date.timestamp
+import com.emikhalets.convertapp.core.ui.CurrencyVisualTransformation
 import com.emikhalets.convertapp.core.ui.component.AppSwipeToDelete
 import com.emikhalets.convertapp.core.ui.component.AppSwipeToRefresh
 import com.emikhalets.convertapp.core.ui.component.DialogError
 import com.emikhalets.convertapp.core.ui.component.FloatingButtonBox
+import com.emikhalets.convertapp.core.ui.extentions.ScreenPreview
+import com.emikhalets.convertapp.core.ui.theme.AppTheme
+import com.emikhalets.convertapp.presentation.screens.CurrenciesContract.Action
 import java.util.Date
 
 @Composable
@@ -70,6 +70,7 @@ private fun ScreenContent(
     ) {
         FloatingButtonBox(
             onClick = { onActionSent(Action.Input.NewCurrencyVisible(true)) },
+            modifier = Modifier.weight(1f)
         ) {
             Column(modifier = Modifier.fillMaxSize()) {
                 ExchangesDateBox(
@@ -203,7 +204,8 @@ private fun BaseCurrencyBox(
         )
     }
     LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
+        // TODO: temp commented autofocus in text field for base currency
+        //focusRequester.requestFocus()
     }
 }
 

@@ -42,7 +42,7 @@ class CurrenciesViewModel @Inject constructor(
 ) : MviViewModel<Action, Effect, State>() {
 
     private var convertJob: Job? = null
-    private var updatingJob: Job? = null
+    private var updateJob: Job? = null
 
     private val currenciesFlow: Flow<List<CurrencyModel>> =
         flow { emitAll(getCurrenciesUseCase()) }
@@ -116,8 +116,8 @@ class CurrenciesViewModel @Inject constructor(
     }
 
     private fun updateExchanges() {
-        if (updatingJob?.isActive == true) updatingJob?.cancel()
-        updatingJob = launch {
+        if (updateJob?.isActive == true) updateJob?.cancel()
+        updateJob = launch {
             setState { it.copy(isLoading = true) }
             when (val result = updateExchangesUseCase(currentState.exchanges)) {
                 UpdateExchangesUseCase.Result.Success -> Unit

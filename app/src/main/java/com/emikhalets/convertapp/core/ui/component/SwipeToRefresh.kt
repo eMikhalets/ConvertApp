@@ -2,6 +2,7 @@ package com.emikhalets.convertapp.core.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.ExperimentalMaterialApi
@@ -20,7 +21,7 @@ import com.emikhalets.convertapp.core.ui.theme.AppTheme
 fun AppSwipeToRefresh(
     isLoading: Boolean,
     onRefresh: () -> Unit,
-    content: @Composable () -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     val pullRefreshState = rememberPullRefreshState(refreshing = isLoading, onRefresh = onRefresh)
     Box(

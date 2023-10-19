@@ -1,5 +1,6 @@
 package com.emikhalets.convertapp.domain.use_case
 
+import com.emikhalets.convertapp.core.common.extensions.logd
 import com.emikhalets.convertapp.data.Repository
 import com.emikhalets.convertapp.domain.model.ExchangeModel
 import javax.inject.Inject
@@ -10,6 +11,7 @@ class GetExchangesUseCase @Inject constructor(
 ) {
 
     operator fun invoke(): Flow<List<ExchangeModel>> {
+        logd("GetExchangesUseCase")
         return repository.getExchanges()
     }
 }

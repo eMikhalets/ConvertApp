@@ -2,7 +2,7 @@ package com.emikhalets.convertapp.core.network
 
 import javax.inject.Inject
 
-class CurrencyRemoteDataSource @Inject constructor(
+class RemoteDataSource @Inject constructor(
     private val currencyParser: CurrencyParser,
 ) {
 

@@ -1,5 +1,6 @@
 package com.emikhalets.convertapp.domain.use_case
 
+import com.emikhalets.convertapp.core.common.extensions.logd
 import com.emikhalets.convertapp.domain.model.ExchangeModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +14,12 @@ class ConvertCurrencyUseCase @Inject constructor() {
         baseCode: String,
         baseValue: Long,
     ): List<Pair<String, Long>> {
+        logd(
+            "ConvertCurrencyUseCase:" +
+                    "\n currencies: $currencies" +
+                    "\n exchanges: $exchanges" +
+                    "\n baseCode: $baseCode baseValue: $baseValue"
+        )
         return withContext(Dispatchers.IO) {
             currencies.map { pair ->
                 if (pair.first != baseCode) {

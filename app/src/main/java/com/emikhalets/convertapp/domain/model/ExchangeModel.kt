@@ -46,5 +46,5 @@ data class ExchangeModel(
 }
 
 fun List<ExchangeModel>.getUpdatedDate(): Long {
-    return minOf { it.date }
+    return if (this.isEmpty()) return 0 else minOf { it.date }
 }

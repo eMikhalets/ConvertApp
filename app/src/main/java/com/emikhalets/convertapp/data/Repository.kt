@@ -1,7 +1,8 @@
 package com.emikhalets.convertapp.data
 
 import com.emikhalets.convertapp.core.common.extensions.execute
-import com.emikhalets.convertapp.core.database.ConvertLocalDataSource
+import com.emikhalets.convertapp.core.common.extensions.logd
+import com.emikhalets.convertapp.core.database.LocalDataSource
 import com.emikhalets.convertapp.core.database.table_currencies.CurrencyDb
 import com.emikhalets.convertapp.core.database.table_currencies.CurrencyDb.Companion.toDb
 import com.emikhalets.convertapp.core.database.table_currencies.CurrencyDb.Companion.toModelFlow
@@ -9,7 +10,7 @@ import com.emikhalets.convertapp.core.database.table_exchanges.ExchangeDb
 import com.emikhalets.convertapp.core.database.table_exchanges.ExchangeDb.Companion.toDb
 import com.emikhalets.convertapp.core.database.table_exchanges.ExchangeDb.Companion.toDbList
 import com.emikhalets.convertapp.core.database.table_exchanges.ExchangeDb.Companion.toModelFlow
-import com.emikhalets.convertapp.core.network.CurrencyRemoteDataSource
+import com.emikhalets.convertapp.core.network.RemoteDataSource
 import com.emikhalets.convertapp.domain.AppResult
 import com.emikhalets.convertapp.domain.model.CurrencyModel
 import com.emikhalets.convertapp.domain.model.ExchangeModel
@@ -18,19 +19,22 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
 class Repository @Inject constructor(
-    private val localDataSource: ConvertLocalDataSource,
-    private val remoteDataSource: CurrencyRemoteDataSource,
+    private val localDataSource: LocalDataSource,
+    private val remoteDataSource: RemoteDataSource,
 ) {
 
     fun getExchanges(): Flow<List<ExchangeModel>> {
+        logd("getExchanges")
         return localDataSource.getExchanges().toModelFlow()
     }
 
     fun getCurrencies(): Flow<List<CurrencyModel>> {
+        logd("getCurrencies")
         return localDataSource.getCurrencies().toModelFlow()
     }
 
     suspend fun updateExchanges(list: List<ExchangeModel>): AppResult<Unit> {
+        logd("updateExchanges: $list")
         return execute {
             val codes = list
                 .filter { it.isNeedUpdate() }
@@ -46,6 +50,7 @@ class Repository @Inject constructor(
     }
 
     suspend fun insertCurrency(code: String): AppResult<Unit> {
+        logd("insertCurrency: $code")
         return execute {
             if (!localDataSource.isCurrencyExist(code)) {
                 val currency = CurrencyModel(code).toDb()
@@ -63,6 +68,7 @@ class Repository @Inject constructor(
     }
 
     suspend fun deleteCurrency(code: String): AppResult<Unit> {
+        logd("deleteCurrency: $code")
         return execute {
             localDataSource.deleteCurrency(code)
             localDataSource.deleteExchanges(code)
@@ -76,6 +82,7 @@ class Repository @Inject constructor(
     }
 
     private fun List<CurrencyDb>.createNewExchanges(code: String): List<ExchangeDb> {
+        logd("createNewExchanges: $code")
         return dropLast(1).map { ExchangeModel(it.code, code).toDb() }
     }
 }

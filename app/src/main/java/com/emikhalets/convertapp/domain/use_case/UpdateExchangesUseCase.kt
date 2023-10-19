@@ -1,5 +1,6 @@
 package com.emikhalets.convertapp.domain.use_case
 
+import com.emikhalets.convertapp.core.common.extensions.logd
 import com.emikhalets.convertapp.data.Repository
 import com.emikhalets.convertapp.domain.AppResult
 import com.emikhalets.convertapp.domain.StringValue
@@ -11,6 +12,7 @@ class UpdateExchangesUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(list: List<ExchangeModel>): Result {
+        logd("UpdateExchangesUseCase: $list")
         return when (val result = repository.updateExchanges(list)) {
             is AppResult.Failure -> Result.Failure(result.error)
             is AppResult.Success -> Result.Success
