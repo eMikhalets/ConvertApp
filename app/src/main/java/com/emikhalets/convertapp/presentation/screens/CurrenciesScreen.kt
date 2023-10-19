@@ -38,13 +38,13 @@ import com.emikhalets.convertapp.core.ui.CurrencyVisualTransformation
 import com.emikhalets.convertapp.core.ui.extentions.ScreenPreview
 import com.emikhalets.convertapp.core.ui.theme.AppTheme
 import com.emikhalets.convertapp.presentation.screens.CurrenciesContract.Action
-import com.emikhalets.core.common.date.formatFullDate
-import com.emikhalets.core.common.date.localDate
-import com.emikhalets.core.common.date.timestamp
-import com.emikhalets.core.ui.component.AppSwipeToDelete
-import com.emikhalets.core.ui.component.AppSwipeToRefresh
-import com.emikhalets.core.ui.component.DialogError
-import com.emikhalets.core.ui.component.FloatingButtonBox
+import com.emikhalets.convertapp.core.common.date.formatFullDate
+import com.emikhalets.convertapp.core.common.date.localDate
+import com.emikhalets.convertapp.core.common.date.timestamp
+import com.emikhalets.convertapp.core.ui.component.AppSwipeToDelete
+import com.emikhalets.convertapp.core.ui.component.AppSwipeToRefresh
+import com.emikhalets.convertapp.core.ui.component.DialogError
+import com.emikhalets.convertapp.core.ui.component.FloatingButtonBox
 import java.util.Date
 
 @Composable

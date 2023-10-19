@@ -1,8 +1,8 @@
 package com.emikhalets.convertapp.domain.model
 
 import com.emikhalets.convertapp.core.common.ZeroLong
-import com.emikhalets.core.common.date.localDate
-import com.emikhalets.core.common.date.timestamp
+import com.emikhalets.convertapp.core.common.date.localDate
+import com.emikhalets.convertapp.core.common.date.timestamp
 import java.util.Date
 
 data class ExchangeModel(

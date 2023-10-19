@@ -18,7 +18,7 @@ import com.emikhalets.convertapp.domain.use_case.UpdateExchangesUseCase
 import com.emikhalets.convertapp.presentation.screens.CurrenciesContract.Action
 import com.emikhalets.convertapp.presentation.screens.CurrenciesContract.Effect
 import com.emikhalets.convertapp.presentation.screens.CurrenciesContract.State
-import com.emikhalets.core.common.date.startOfNextDay
+import com.emikhalets.convertapp.core.common.date.startOfNextDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Date
 import javax.inject.Inject

@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.emikhalets.convertapp.R
 import com.emikhalets.convertapp.core.ui.extentions.BoxPreview
 import com.emikhalets.convertapp.core.ui.theme.AppTheme
-import com.emikhalets.core.ui.component.AppDialog
+import com.emikhalets.convertapp.core.ui.component.AppDialog
 
 @Composable
 fun NewCurrencyBox(
