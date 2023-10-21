@@ -1,8 +1,9 @@
 package com.emikhalets.convertapp.presentation.screens
 
-import androidx.lifecycle.viewModelScope
 import com.emikhalets.convertapp.core.common.EmptyString
 import com.emikhalets.convertapp.core.common.ZeroLong
+import com.emikhalets.convertapp.core.common.date.startOfNextDay
+import com.emikhalets.convertapp.core.common.extensions.logd
 import com.emikhalets.convertapp.core.common.mvi.MviViewModel
 import com.emikhalets.convertapp.core.common.mvi.launch
 import com.emikhalets.convertapp.domain.StringValue
@@ -18,18 +19,14 @@ import com.emikhalets.convertapp.domain.use_case.UpdateExchangesUseCase
 import com.emikhalets.convertapp.presentation.screens.CurrenciesContract.Action
 import com.emikhalets.convertapp.presentation.screens.CurrenciesContract.Effect
 import com.emikhalets.convertapp.presentation.screens.CurrenciesContract.State
-import com.emikhalets.convertapp.core.common.date.startOfNextDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Date
 import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 
 @HiltViewModel
 class CurrenciesViewModel @Inject constructor(
@@ -44,19 +41,17 @@ class CurrenciesViewModel @Inject constructor(
     private var convertJob: Job? = null
     private var updateJob: Job? = null
 
-    private val currenciesFlow: Flow<List<CurrencyModel>> =
-        flow { emitAll(getCurrenciesUseCase()) }
-            .catch { setFailureState(it) }
-            .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
-
-    private val exchangesFlow: Flow<List<ExchangeModel>> =
-        flow { emitAll(getExchangesUseCase()) }
-            .catch { setFailureState(it) }
-            .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
-
     init {
-        launch { exchangesFlow.collect { setExchangesState(it) } }
-        launch { currenciesFlow.collect { setCurrenciesState(it) } }
+        launch {
+            getCurrenciesUseCase()
+                .catch { setFailureState(it) }
+                .collect { setCurrenciesState(it) }
+        }
+        launch {
+            getExchangesUseCase()
+                .catch { setFailureState(it) }
+                .collect { setExchangesState(it) }
+        }
     }
 
     override fun setInitialState() = State()
@@ -173,11 +168,13 @@ class CurrenciesViewModel @Inject constructor(
     }
 
     private fun setCurrenciesState(list: List<CurrencyModel>) {
+        logd("setCurrenciesState: $list")
         val currencies = list.map { Pair(it.code, ZeroLong) }
         setState { it.copy(currencies = currencies) }
     }
 
     private fun setExchangesState(list: List<ExchangeModel>) {
+        logd("setExchangesState: $list")
         val needUpdate = list.any { it.isNeedUpdate() }
         val updatedDate = list.getUpdatedDate()
         setState { it.copy(exchanges = list, date = updatedDate, isOldExchanges = needUpdate) }

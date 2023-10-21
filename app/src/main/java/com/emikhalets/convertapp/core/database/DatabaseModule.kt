@@ -9,13 +9,15 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
     @Provides
-    fun providesAppDatabase(@ApplicationContext context: Context): AppDatabase {
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
         val name = "Convert.db"
         return Room
             .databaseBuilder(context, AppDatabase::class.java, name)
@@ -23,12 +25,12 @@ object DatabaseModule {
     }
 
     @Provides
-    fun providesCurrenciesDao(database: AppDatabase): CurrenciesDao {
+    fun provideCurrenciesDao(database: AppDatabase): CurrenciesDao {
         return database.currenciesDao
     }
 
     @Provides
-    fun providesExchangesDao(database: AppDatabase): ExchangesDao {
+    fun provideExchangesDao(database: AppDatabase): ExchangesDao {
         return database.exchangesDao
     }
 }

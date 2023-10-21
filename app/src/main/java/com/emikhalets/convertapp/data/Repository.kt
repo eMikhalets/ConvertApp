@@ -16,8 +16,10 @@ import com.emikhalets.convertapp.domain.model.CurrencyModel
 import com.emikhalets.convertapp.domain.model.ExchangeModel
 import java.util.Date
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 
+@Singleton
 class Repository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,

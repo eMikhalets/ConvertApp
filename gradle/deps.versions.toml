@@ -9,7 +9,7 @@ androidxComposeBom = '2023.10.00'
 androidxHiltNavigation = '1.0.0'
 androidxJunit = "1.1.5"
 androidxNavigationCompose = '2.7.4'
-androidxRoom = '2.5.2'
+androidxRoom = '2.6.0'
 googleHilt = "2.46.1"
 # Secondary
 androidxLifecycle = '2.6.2'
